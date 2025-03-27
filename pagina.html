@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Radio Legión</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            color: #333;
+            transition: all 0.3s;
+        }
+        header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #ff5733;
+            color: white;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        .menu-button {
+            position: absolute;
+            left: 20px;
+            top: 15px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            background: none;
+            border: none;
+            color: white;
+        }
+        .dark-mode-button {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            background: none;
+            border: none;
+            color: white;
+        }
+        #menu {
+            position: absolute;
+            top: 50px;
+            left: 20px;
+            display: none;
+            flex-direction: column;
+            background-color: #ff5733;
+            width: 150px;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        #menu a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid #fff;
+        }
+        #menu a:last-child {
+            border-bottom: none;
+        }
+        #menu a:hover {
+            background-color: #e84118;
+        }
+        .icon {
+            width: 20px;
+            height: 20px;
+        }
+        .radio-images {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+        }
+        .radio-images img {
+            width: 150px;
+            height: 150px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .radio-images img:hover {
+            transform: scale(1.1);
+        }
+        audio {
+            display: block;
+            margin: 30px auto;
+            width: 100%;
+            max-width: 400px;
+        }
+        #chat-container {
+            margin: 20px auto;
+            max-width: 500px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+        #messages {
+            height: 200px;
+            overflow-y: scroll;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        #messages p {
+            margin: 5px 0;
+        }
+        #chat-input {
+            display: flex;
+            gap: 10px;
+        }
+        #chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        #chat-input button {
+            padding: 10px 15px;
+            background-color: #ff5733;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #chat-input button:hover {
+            background-color: #e84118;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        footer a img {
+            width: 30px;
+            vertical-align: middle;
+        }
+        .dark-mode {
+            background-color: #333;
+            color: white;
+        }
+        .dark-mode header {
+            background-color: #444;
+        }
+        .dark-mode footer {
+            background-color: #555;
+        }
+        .dark-mode #chat-container {
+            background-color: #444;
+            border-color: #555;
+        }
+        .dark-mode #messages {
+            background-color: #333;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+
+    <!-- Encabezado con menú y tema oscuro/claro -->
+    <header>
+        <button class="menu-button" onclick="toggleMenu()">☰</button>
+         <h1>La Radio Legión</h1>
+
+        <button class="dark-mode-button" onclick="toggleDarkMode()">🌓</button>
+    </header>
+    <div id="menu">
+        <a href="https://www.paypal.com/" target="_blank">
+            <img src="https://img.icons8.com/color/48/000000/paypal.png" alt="PayPal" class="icon">
+            PayPal
+        </a>
+        <a href="https://discord.com/" target="_blank">
+            <img src="https://img.icons8.com/color/48/000000/discord-logo.png" alt="Discord" class="icon">
+            Discord
+        </a>
+    </div>
+
+    <!-- Botones con imágenes de radios -->
+    <div class="radio-images">
+        <img src="https://grupoelixir.es/radio1.png" alt="Reggaeton Urbano" onclick="playRadio('https://kappa.radioplayer.com.ar:9130/lanet947')">
+        <img src="https://grupoelixir.es/radio2.png" alt="Hip Hop Classic" onclick="playRadio('https://topradio-stream21.radiohost.de/kissfm-hiphop_aac-64?ref=radiode&amsparams=radiode')">
+        <img src="https://grupoelixir.es/radio3.png" alt="Rock" onclick="playRadio('https://radiorock.stream.laut.fm/radiorock?ref=radiode&t302=2022-01-16_23-09-00&uuid=3545d99d-0cd2-43bd-bc0b-49b13057de34')">
+        <img src="https://grupoelixir.es/radio4.png" alt="Reggaeton/Trap 1" onclick="playRadio('https://radio.grupoelixir.es:9006/stream')">
+    </div>
+
+    <!-- Reproductor de audio -->
+    <audio id="radio-player" controls>
+        <source src="" type="audio/mpeg">
+        Tu navegador no soporta audio.
+    </audio>
+
+    <!-- Chat -->
+
+    <!-- Pie de página -->
+    <footer>
+        <p>&copy; 2025 La Radio Legión. Todos los derechos reservados.</p>
+        <a href="https://facebook.com" target="_blank"><img src="https://img.icons8.com/color/48/000000/facebook-new.png" alt="Facebook"></a>
+        <a href="https://instagram.com" target="_blank"><img src="https://img.icons8.com/color/48/000000/instagram-new.png" alt="Instagram"></a>
+        <a href="https://twitter.com" target="_blank"><img src="https://img.icons8.com/color/48/000000/twitter.png" alt="Twitter"></a>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        function playRadio(url) {
+            const player = document.getElementById('radio-player');
+            player.src = url;
+            player.play();
+        }
+        
+        function toggleMenu() {
+            const menu = document.getElementById('menu');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+
+
+
+    </script>
+</body>
+</html>
